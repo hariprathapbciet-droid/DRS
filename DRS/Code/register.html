@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Diabetic Retinopathy Screening - Registration</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+
+            min-height: 100vh;
+
+            background-image:
+
+                linear-gradient(
+                    rgba(0, 15, 30, 0.58),
+                    rgba(0, 25, 45, 0.65)
+                ),
+
+                url("eye1.jpeg");
+
+            background-size: cover;
+
+            background-position: center;
+
+            background-attachment: fixed;
+
+            color: white;
+
+            padding: 40px 20px;
+        }
+
+        .container {
+
+            width: 95%;
+
+            max-width: 1200px;
+
+            margin: auto;
+
+            padding: 35px 45px;
+
+            background: rgba(255, 255, 255, 0.12);
+
+            border: 1px solid rgba(255, 255, 255, 0.35);
+
+            border-radius: 25px;
+
+            backdrop-filter: blur(10px);
+
+            -webkit-backdrop-filter: blur(10px);
+
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+
+        .heading {
+
+            text-align: center;
+
+            margin-bottom: 35px;
+        }
+
+
+        .heading h1 {
+
+            font-size: 40px;
+
+            color: white;
+
+            letter-spacing: 1px;
+
+            text-shadow:
+                0 3px 10px rgba(0, 0, 0, 0.6);
+        }
+
+
+        .heading p {
+
+            margin-top: 10px;
+
+            font-size: 16px;
+
+            color: #e0faff;
+        }
+
+
+        .form-container {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 25px 35px;
+        }
+
+        .field {
+
+            display: flex;
+
+            flex-direction: column;
+        }
+
+
+        .field label {
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            margin-bottom: 9px;
+
+            color: skyblue;
+
+            text-shadow:
+                0 2px 5px rgba(0, 0, 0, 0.7);
+        }
+
+
+        .field input,
+        .field textarea,
+        .field select {
+
+            width: 100%;
+
+            padding: 14px;
+
+            font-size: 15px;
+
+            color: #333;
+
+            background: rgba(255, 255, 255, 0.92);
+
+            border: 2px solid rgba(255, 255, 255, 0.7);
+
+            border-radius: 10px;
+
+            outline: none;
+
+            transition: 0.3s;
+        }
+
+        .field input:focus,
+        .field textarea:focus,
+        .field select:focus {
+
+            border-color: skyblue;
+
+            box-shadow:
+                0 0 12px rgba(0, 217, 255, 0.7);
+        }
+
+
+        .field textarea {
+
+            height: 105px;
+
+            resize: none;
+        }
+
+        .field select {
+
+            cursor: pointer;
+
+            appearance: auto;
+        }
+
+        .full {
+
+            grid-column: 1 / 3;
+        }
+
+        .about {
+
+            margin-top: 35px;
+
+            padding: 25px;
+
+            background: rgba(0, 30, 50, 0.58);
+
+            border: 1px solid rgba(255, 255, 255, 0.3);
+
+            border-radius: 15px;
+
+            box-shadow:
+                0 8px 20px rgba(0, 0, 0, 0.25);
+        }
+
+
+        .about h2 {
+
+            color: #7eeeff;
+
+            font-size: 24px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .about p {
+
+            color: #f2fbff;
+
+            font-size: 15px;
+
+            line-height: 1.7;
+        }
+
+        .submit-area {
+
+            text-align: center;
+
+            margin-top: 30px;
+        }
+
+
+        .submit-btn {
+
+            padding: 15px 60px;
+
+            border: none;
+
+            border-radius: 30px;
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    #00a8d6,
+                    #006b91
+                );
+
+            color: white;
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 7px 20px rgba(0, 0, 0, 0.35);
+
+            transition: 0.3s;
+        }
+
+
+        .submit-btn:hover {
+
+            transform: translateY(-3px);
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    #00d9ff,
+                    #007da7
+                );
+
+            box-shadow:
+                0 0 20px rgba(0, 217, 255, 0.6);
+        }
+
+        #successMessage {
+
+            display: none;
+
+            width: 500px;
+
+            max-width: 100%;
+
+            margin: 35px auto 0;
+
+            padding: 25px;
+
+            text-align: center;
+
+            background: rgba(10, 100, 70, 0.85);
+
+            border: 2px solid #70ffc0;
+
+            border-radius: 15px;
+
+            color: white;
+
+            font-size: 23px;
+
+            font-weight: bold;
+
+            box-shadow:
+                0 0 25px rgba(0, 255, 170, 0.35);
+        }
+
+        .success-icon {
+
+            display: inline-flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            width: 35px;
+
+            height: 35px;
+
+            margin-right: 8px;
+
+            border-radius: 50%;
+
+            background: #64e6a7;
+
+            color: #075a3a;
+
+            font-size: 22px;
+        }
+
+        .corner {
+
+            position: fixed;
+
+            width: 100px;
+
+            height: 100px;
+
+            pointer-events: none;
+
+            z-index: -1;
+        }
+
+
+        .corner::before,
+        .corner::after {
+
+            content: "";
+
+            position: absolute;
+
+            background: skyblue;
+
+            opacity: 0.7;
+        }
+
+        .top-left {
+
+            top: 0;
+
+            left: 0;
+        }
+
+
+        .top-left::before {
+
+            width: 70px;
+
+            height: 3px;
+
+            top: 25px;
+
+            left: 0;
+        }
+
+
+        .top-left::after {
+
+            width: 3px;
+
+            height: 70px;
+
+            top: 0;
+
+            left: 25px;
+        }
+
+
+        .top-right {
+
+            top: 0;
+
+            right: 0;
+        }
+
+
+        .top-right::before {
+
+            width: 70px;
+
+            height: 3px;
+
+            top: 25px;
+
+            right: 0;
+        }
+
+
+        .top-right::after {
+
+            width: 3px;
+
+            height: 70px;
+
+            top: 0;
+
+            right: 25px;
+        }
+
+
+        .bottom-left {
+
+            bottom: 0;
+
+            left: 0;
+        }
+
+
+        .bottom-left::before {
+
+            width: 70px;
+
+            height: 3px;
+
+            bottom: 25px;
+
+            left: 0;
+        }
+
+
+        .bottom-left::after {
+
+            width: 3px;
+
+            height: 70px;
+
+            bottom: 0;
+
+            left: 25px;
+        }
+
+
+        .bottom-right {
+
+            bottom: 0;
+
+            right: 0;
+        }
+
+
+        .bottom-right::before {
+
+            width: 70px;
+
+            height: 3px;
+
+            bottom: 25px;
+
+            right: 0;
+        }
+
+
+        .bottom-right::after {
+
+            width: 3px;
+
+            height: 70px;
+
+            bottom: 0;
+
+            right: 25px;
+        }
+        @media (max-width: 750px) {
+
+            body {
+
+                padding: 20px 10px;
+            }
+
+
+            .container {
+
+                padding: 25px 20px;
+            }
+
+
+            .heading h1 {
+
+                font-size: 29px;
+            }
+
+
+            .form-container {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .full {
+
+                grid-column: 1;
+            }
+
+
+            .about h2 {
+
+                font-size: 20px;
+            }
+
+
+            .field input,
+            .field textarea,
+            .field select {
+
+                font-size: 14px;
+            }
+
+
+            .submit-btn {
+
+                padding: 13px 45px;
+
+                font-size: 17px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="corner top-left"></div>
+
+    <div class="corner top-right"></div>
+
+    <div class="corner bottom-left"></div>
+
+    <div class="corner bottom-right"></div>
+
+
+
+    <div class="container">
+
+        <div class="heading">
+
+            <h1>
+                Diabetic Retinopathy Screening
+            </h1>
+
+            <p>
+                Register your details for eye screening
+            </p>
+
+        </div>
+        <form id="registrationForm">
+            <div class="form-container">
+
+                <div class="field">
+
+                    <label for="patientId">
+                        Patient ID
+                    </label>
+
+                    <input
+                        type="text"
+                        id="patientId"
+                        name="patientId"
+                        placeholder="Enter Patient ID"
+                        required>
+
+                </div>
+
+                <div class="field">
+
+                    <label for="name">
+                        Patient Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Enter Patient Name"
+                        required>
+
+                </div>
+
+                <div class="field">
+
+                    <label for="age">
+                        Age
+                    </label>
+
+                    <input
+                        type="number"
+                        id="age"
+                        name="age"
+                        placeholder="Enter Age"
+                        min="1"
+                        max="120"
+                        required>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label for="gender">
+                        Gender
+                    </label>
+
+                    <select
+                        id="gender"
+                        name="gender"
+                        required>
+
+                        <option
+                            value=""
+                            disabled
+                            selected>
+
+                            Select Gender
+
+                        </option>
+
+                        <option value="Male">
+                            Male
+                        </option>
+
+                        <option value="Female">
+                            Female
+                        </option>
+
+                        <option value="Others">
+                            Others
+                        </option>
+
+                    </select>
+
+                </div>
+                <div class="field">
+
+                    <label for="phone">
+                        Phone Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        placeholder="Enter 10 digit phone number"
+                        pattern="[0-9]{10}"
+                        maxlength="10"
+                        required>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label for="temporaryAddress">
+                        Temporary Address
+                    </label>
+
+                    <textarea
+                        id="temporaryAddress"
+                        name="temporaryAddress"
+                        placeholder="Enter Temporary Address"
+                        required></textarea>
+
+                </div>
+
+
+                <div class="field full">
+
+                    <label for="permanentAddress">
+                        Permanent Address
+                    </label>
+
+                    <textarea
+                        id="permanentAddress"
+                        name="permanentAddress"
+                        placeholder="Enter Permanent Address"
+                        required></textarea>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="submit-area">
+
+                <button
+                    type="submit"
+                    class="submit-btn">
+
+
+                <a href="upload.html" class="btn create-btn">
+                    Submit
+                </a>
+
+
+        </div>
+                </button>
+
+            </div>
+
+
+            <div class="about">
+
+                <h2>
+                    About Diabetic Retinopathy
+                </h2>
+
+                <p>
+
+                    Diabetic retinopathy is an eye condition
+                    that can occur in people with diabetes.
+                    High blood sugar levels can damage the
+                    small blood vessels in the retina, which
+                    is the light-sensitive part at the back
+                    of the eye. In the early stages, there
+                    may be no noticeable symptoms. Regular
+                    eye examinations can help detect changes
+                    early and help protect vision.
+
+                </p>
+
+            </div>
+
+
+        </form>
+
+
+    </div>
+
+    <script>
+
+
+        const form =
+            document.getElementById(
+                "registrationForm"
+            );
+
+        const successMessage =
+            document.getElementById(
+                "successMessage"
+            );
+
+
+        form.addEventListener(
+            "submit",
+            function(event) {
+
+                event.preventDefault();
+
+
+                if (form.checkValidity()) {
+
+
+                    form.style.display = "none";
+
+                    successMessage.style.display =
+                        "block";
+
+
+                }
+
+                else {
+
+                    form.reportValidity();
+
+                }
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>

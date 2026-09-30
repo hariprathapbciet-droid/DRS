@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>DRS - Contact Us</title>
+
+
+    <style>
+
+        /* ==============================
+           GENERAL
+        ============================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+
+        body {
+            background: white;
+            color: #12365d;
+        }
+
+
+
+        /* ==============================
+           NAVIGATION BAR
+        ============================== */
+
+        .navbar {
+
+            width: 100%;
+            height: 75px;
+
+            background: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+        }
+
+
+        /* LOGO */
+
+        .logo-area {
+
+            display: flex;
+            align-items: center;
+
+        }
+
+
+        .logo-area img {
+
+            width: 75px;
+            height: 55px;
+
+            object-fit: contain;
+
+            margin-right: 10px;
+
+        }
+
+
+        .logo-text h1 {
+
+            font-size: 27px;
+
+            color: #173b63;
+
+            line-height: 25px;
+
+            letter-spacing: 1px;
+
+        }
+
+
+        .logo-text p {
+
+            font-size: 9px;
+
+            color: #8295a8;
+
+            margin-top: 4px;
+
+        }
+
+
+
+        /* NAVIGATION LINKS */
+
+        .nav-links {
+
+            display: flex;
+
+            gap: 40px;
+
+        }
+
+
+        .nav-links a {
+
+            text-decoration: none;
+
+            color: #243b53;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            padding: 27px 0;
+
+            position: relative;
+
+        }
+
+
+        .nav-links a:hover {
+
+            color: #087fc1;
+
+        }
+
+
+        .nav-links a.active {
+
+            color: #087fc1;
+
+        }
+
+
+        .nav-links a.active::after {
+
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+
+            bottom: 12px;
+
+            width: 100%;
+
+            height: 3px;
+
+            background: #087fc1;
+
+            border-radius: 10px;
+
+        }
+
+
+
+        /* ==============================
+           CONTACT SECTION
+        ============================== */
+
+        .contact-section {
+
+            padding: 60px 7%;
+
+            background: white;
+
+        }
+
+
+        .section-heading {
+
+            text-align: center;
+
+            margin-bottom: 40px;
+
+        }
+
+
+        .section-heading h2 {
+
+            font-size: 32px;
+
+            color: #12365d;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .section-heading p {
+
+            color: #71869a;
+
+            font-size: 14px;
+
+        }
+
+
+
+        /* CONTACT CARDS */
+
+        .contact-container {
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 25px;
+
+            flex-wrap: wrap;
+
+        }
+
+
+        .contact-card {
+
+            width: 280px;
+
+            min-height: 185px;
+
+            background: #f4fbff;
+
+            border: 1px solid #dceff8;
+
+            border-radius: 15px;
+
+            padding: 30px 20px;
+
+            text-align: center;
+
+            transition: 0.3s;
+
+        }
+
+
+        .contact-card:hover {
+
+            transform: translateY(-6px);
+
+            box-shadow:
+                0 8px 25px rgba(0, 120, 190, 0.12);
+
+        }
+
+
+        .contact-icon {
+
+            width: 55px;
+
+            height: 55px;
+
+            margin: auto;
+
+            margin-bottom: 15px;
+
+            background: #dff4ff;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 24px;
+
+        }
+
+
+        .contact-card h3 {
+
+            color: #087fc1;
+
+            font-size: 18px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .contact-card p {
+
+            color: #637c91;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+
+        }
+
+
+
+        /* ==============================
+           INFORMATION SECTION
+        ============================== */
+
+        .information-section {
+
+            background: #f4fbff;
+
+            padding: 60px 7%;
+
+        }
+
+
+        .info-box {
+
+            max-width: 1000px;
+
+            margin: 0 auto 30px auto;
+
+            background: white;
+
+            padding: 35px 40px;
+
+            border-radius: 15px;
+
+            border-left: 5px solid #087fc1;
+
+            box-shadow:
+                0 5px 20px rgba(0, 0, 0, 0.05);
+
+        }
+
+
+        .info-box h2 {
+
+            color: #12365d;
+
+            font-size: 25px;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .info-box h3 {
+
+            color: #087fc1;
+
+            font-size: 17px;
+
+            margin-top: 20px;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .info-box p {
+
+            color: #637c91;
+
+            font-size: 14px;
+
+            line-height: 1.8;
+
+        }
+
+
+        .info-box ul {
+
+            margin-left: 22px;
+
+            margin-top: 10px;
+
+        }
+
+
+        .info-box li {
+
+            color: #637c91;
+
+            font-size: 14px;
+
+            line-height: 1.9;
+
+        }
+
+
+
+        /* ==============================
+           IMPORTANT NOTICE
+        ============================== */
+
+        .notice {
+
+            max-width: 1000px;
+
+            margin: 40px auto 0;
+
+            padding: 22px 25px;
+
+            background: #e9f7ff;
+
+            border-radius: 12px;
+
+            text-align: center;
+
+        }
+
+
+        .notice h3 {
+
+            color: #087fc1;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .notice p {
+
+            color: #526d82;
+
+            font-size: 13px;
+
+            line-height: 1.7;
+
+        }
+
+
+
+        /* ==============================
+           FOOTER
+        ============================== */
+
+        footer {
+
+            background: #12365d;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 25px;
+
+            font-size: 12px;
+
+        }
+
+
+        footer span {
+
+            color: #65c7ef;
+
+        }
+
+
+
+        /* ==============================
+           MOBILE
+        ============================== */
+
+        @media (max-width: 700px) {
+
+
+            .navbar {
+
+                height: auto;
+
+                padding: 15px 5%;
+
+                flex-direction: column;
+
+                gap: 10px;
+
+            }
+
+
+            .nav-links {
+
+                gap: 25px;
+
+            }
+
+
+            .nav-links a {
+
+                padding: 8px;
+
+            }
+
+
+            .nav-links a.active::after {
+
+                bottom: 0;
+
+            }
+
+
+            .section-heading h2 {
+
+                font-size: 28px;
+
+            }
+
+
+            .info-box {
+
+                padding: 25px 22px;
+
+            }
+
+
+            .info-box h2 {
+
+                font-size: 22px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+
+<body>
+
+
+
+    <!-- ==============================
+         NAVIGATION
+    ============================== -->
+
+    <header class="navbar">
+
+
+        <div class="logo-area">
+
+
+            <!-- YOUR LOGO -->
+
+            <img
+                src="logo5.jpeg"
+                alt="DRS Eye Logo"
+            >
+
+
+            <div class="logo-text">
+
+                <h1>
+                    DRS
+                </h1>
+
+                <p>
+                    Healthy Eyes Brighter Future
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+
+        <nav class="nav-links">
+
+
+            <a href="home.html">
+                Home
+            </a>
+
+
+            <a
+                href="contact.html"
+                class="active">
+
+                Contact & Help
+
+            </a>
+
+
+        </nav>
+
+
+    </header>
+
+
+
+    <!-- ==============================
+         CONTACT US
+    ============================== -->
+
+    <section class="contact-section">
+
+
+        <div class="section-heading">
+
+
+            <h2>
+                Contact Us
+            </h2>
+
+
+            <p>
+                Get in touch with us for help and support.
+            </p>
+
+
+        </div>
+
+
+
+        <div class="contact-container">
+
+
+            <!-- EMAIL -->
+
+            <div class="contact-card">
+
+
+                <div class="contact-icon">
+                    📧
+                </div>
+
+
+                <h3>
+                    Email
+                </h3>
+
+
+                <p>
+
+                    support@drs-health.com
+
+                    <br>
+
+                    We can help with your
+                    platform-related questions.
+
+                </p>
+
+
+            </div>
+
+
+
+            <!-- PHONE -->
+
+            <div class="contact-card">
+
+
+                <div class="contact-icon">
+                    📞
+                </div>
+
+
+                <h3>
+                    Phone
+                </h3>
+
+
+                <p>
+
+                    +91 XXXXX XXXXX
+
+                    <br>
+
+                    Available during
+                    support hours.
+
+                </p>
+
+
+            </div>
+
+
+
+            <!-- HELP -->
+
+            <div class="contact-card">
+
+
+                <div class="contact-icon">
+                    💬
+                </div>
+
+
+                <h3>
+                    Help & Support
+                </h3>
+
+
+                <p>
+
+                    For account, image upload
+                    or screening-related
+                    technical questions.
+
+                </p>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ==============================
+         INFORMATION
+    ============================== -->
+
+    <section class="information-section">
+
+
+
+        <!-- RETINOPATHY -->
+
+        <div class="info-box">
+
+
+            <h2>
+                What is Retinopathy?
+            </h2>
+
+
+            <p>
+
+                Retinopathy refers to damage or changes
+                affecting the retina, which is the
+                light-sensitive layer at the back of the
+                eye. The retina receives light and sends
+                visual information to the brain.
+
+            </p>
+
+
+            <p style="margin-top:12px;">
+
+                Retinal changes can develop gradually.
+                Some people may not notice symptoms during
+                the early stages. Regular eye examinations
+                can help identify retinal changes at an
+                early stage.
+
+            </p>
+
+
+        </div>
+
+
+
+        <!-- DIABETIC RETINOPATHY -->
+
+        <div class="info-box">
+
+
+            <h2>
+                What is Diabetic Retinopathy?
+            </h2>
+
+
+            <p>
+
+                Diabetic retinopathy is an eye condition
+                associated with diabetes. Over time,
+                high blood sugar levels can damage the
+                small blood vessels that supply the retina.
+
+            </p>
+
+
+            <h3>
+                How does it affect the eye?
+            </h3>
+
+
+            <p>
+
+                Damage to the retinal blood vessels can
+                cause changes in the retina. If the condition
+                progresses, these changes can affect vision.
+
+                Early diabetic retinopathy may not cause
+                noticeable symptoms, making regular eye
+                screening important for people with diabetes.
+
+            </p>
+
+
+            <h3>
+                Possible Warning Signs
+            </h3>
+
+
+            <ul>
+
+                <li>
+                    Blurred or changing vision
+                </li>
+
+                <li>
+                    Difficulty seeing clearly
+                </li>
+
+                <li>
+                    Changes in vision that come and go
+                </li>
+
+                <li>
+                    Difficulty seeing at night
+                </li>
+
+            </ul>
+
+
+            <p style="margin-top:15px;">
+
+                These symptoms can have different causes.
+                Anyone experiencing changes in vision should
+                consult a qualified eye-care professional.
+
+            </p>
+
+
+        </div>
+
+
+
+        <!-- SCREENING -->
+
+        <div class="info-box">
+
+
+            <h2>
+                What is Retinopathy Screening?
+            </h2>
+
+
+            <p>
+
+                Retinopathy screening is an examination
+                used to look for changes in the retina.
+                A retinal or fundus image can provide
+                information about the appearance of the
+                back of the eye.
+
+            </p>
+
+
+            <h3>
+                Why is screening important?
+            </h3>
+
+
+            <p>
+
+                Some retinal changes may develop before
+                noticeable vision problems occur. Screening
+                can help identify people who may need further
+                examination by an eye-care professional.
+
+            </p>
+
+
+            <h3>
+                How does DRS work?
+            </h3>
+
+
+            <ul>
+
+                <li>
+                    Capture or upload a suitable retinal image.
+                </li>
+
+                <li>
+                    The system processes the uploaded image.
+                </li>
+
+                <li>
+                    The screening system analyzes the image
+                    for patterns associated with retinal changes.
+                </li>
+
+                <li>
+                    A screening result is displayed.
+                </li>
+
+                <li>
+                    If an abnormality is suspected,
+                    professional eye evaluation is recommended.
+                </li>
+
+            </ul>
+
+
+        </div>
+
+
+
+        <!-- EYE HEALTH -->
+
+        <div class="info-box">
+
+
+            <h2>
+                Taking Care of Your Eye Health
+            </h2>
+
+
+            <p>
+
+                Taking care of your overall health can help
+                reduce the risk of diabetes-related eye
+                complications. People with diabetes should
+                follow the advice of their healthcare team
+                and attend recommended eye examinations.
+
+            </p>
+
+
+            <h3>
+                Important Eye-Care Tips
+            </h3>
+
+
+            <ul>
+
+                <li>
+                    Attend recommended eye examinations.
+                </li>
+
+                <li>
+                    Follow your healthcare professional's
+                    advice for diabetes management.
+                </li>
+
+                <li>
+                    Report new or sudden changes in vision
+                    to an eye-care professional.
+                </li>
+
+                <li>
+                    Keep your regular health check-ups.
+                </li>
+
+                <li>
+                    Do not rely only on an online screening
+                    result for diagnosis.
+                </li>
+
+            </ul>
+
+
+        </div>
+
+
+
+        <!-- IMPORTANT NOTICE -->
+
+        <div class="notice">
+
+
+            <h3>
+                Important Information
+            </h3>
+
+
+            <p>
+
+                DRS is designed as a screening and awareness
+                platform. A screening result is not a medical
+                diagnosis. If you have concerns about your
+                vision or eye health, consult a qualified
+                eye-care professional.
+
+            </p>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ==============================
+         FOOTER
+    ============================== -->
+
+    <footer>
+
+
+        <p>
+
+            © 2026
+
+            <span>
+                DRS
+            </span>
+
+            - Diabetic Retinopathy Screening
+
+        </p>
+
+
+        <p style="margin-top:7px;">
+
+            Healthy Eyes • Brighter Future
+
+        </p>
+
+
+    </footer>
+
+
+</body>
+
+</html>
