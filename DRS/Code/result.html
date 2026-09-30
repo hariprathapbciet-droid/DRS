@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DRS Result</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="header">
+
+        <div class="eye-logo">
+     <img src="logo.jpeg" height="250px" width="200px" alt="logo">
+        </div>
+
+        <h1>Result</h1>
+
+    </header>
+
+    <main class="result-container">
+
+        <div class="drs-title">
+            Diabetic Retinopathy Screening (DRS)
+        </div>
+
+
+        <p class="analysis-text">
+            After the analysis of the image
+        </p>
+
+
+        <div id="resultBox" class="result-box">
+
+            <div id="resultIcon" class="result-icon"></div>
+
+            <h2 id="resultTitle"></h2>
+
+            <p id="resultMessage"></p>
+
+        </div>
+
+    </main>
+
+    <footer class="bottom-design">
+
+        <img src="bottom.jpeg" alt="DRS Design">
+
+    </footer>
+
+    <script>
+
+
+        let drResult = "negative";
+
+
+        const resultBox =
+            document.getElementById("resultBox");
+
+        const resultIcon =
+            document.getElementById("resultIcon");
+
+        const resultTitle =
+            document.getElementById("resultTitle");
+
+        const resultMessage =
+            document.getElementById("resultMessage");
+
+
+        /* ================= POSITIVE ================= */
+
+        if (drResult === "positive") {
+
+            resultBox.classList.add("positive");
+
+            resultIcon.innerHTML = "⚠";
+
+            resultTitle.innerHTML =
+                "Your DR is Positive";
+
+            resultMessage.innerHTML =
+                "Diabetic retinopathy was detected in the analyzed image.";
+
+        }
+
+
+        /* ================= NEGATIVE ================= */
+
+        else {
+
+            resultBox.classList.add("negative");
+
+            resultIcon.innerHTML = "✓";
+
+            resultTitle.innerHTML =
+                "Your DR is Negative";
+
+            resultMessage.innerHTML =
+                "No signs of diabetic retinopathy were detected in the analyzed image.";
+
+        }
+
+    </script>
+
+</body>
+
+</html>

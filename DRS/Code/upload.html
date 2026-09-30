@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Retinal / Fundus Image Upload Portal</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #eef3f8;
+            color: #172033
+        }
+
+        header {
+            background: #fff;
+            border-bottom: 1px solid #dce3eb
+        }
+
+        .header {
+            max-width: 1200px;
+            margin: auto;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .profile-btn {
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .profile-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            overflow: hidden
+        }
+
+        .logo img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain
+        }
+
+        .brand small {
+            color: #2563eb;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 18px
+        }
+
+        .brand h1 {
+            font-size: 18px;
+            margin-top: 3px;
+            color: #10213d
+        }
+
+        .status {
+            color: #64748b;
+            font-size: 16px
+        }
+
+        .status span {
+            display: inline-block;
+            width: 7px;
+            height: 7px;
+            background: #22c55e;
+            border-radius: 50%;
+            margin-right: 5px
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 20px
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid #dce3eb;
+            border-radius: 14px;
+            padding: 18px;
+            box-shadow: 0 3px 12px rgba(15, 23, 42, .04)
+        }
+
+        .intro {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px
+        }
+
+        .intro h2 {
+            font-size: 22px;
+            margin-bottom: 8px
+        }
+
+        .intro p {
+            color: #64748b;
+            font-size: 14px;
+            line-height: 2.0
+        }
+
+        .badges {
+            display: flex;
+            gap: 6px;
+            margin-top: 12px
+        }
+
+        .badge {
+            background: #eff6ff;
+            color: #2563eb;
+            padding: 5px 9px;
+            border-radius: 15px;
+            font-size: 10px;
+            font-weight: bold
+        }
+
+        .sample-btn {
+            border: 0;
+            background: #eff6ff;
+            color: #2563eb;
+            padding: 10px 13px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 14px
+        }
+
+        .upload-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            margin-top: 20px
+        }
+
+        .eye-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px
+        }
+
+        .eye-title h2 {
+            font-size: 20px
+        }
+
+        .eye-title h2 span {
+            color: #2563eb
+        }
+
+        .eye-title p {
+            color: #64748b;
+            font-size: 15px;
+            margin-top: 3px
+        }
+
+        .eye-code {
+            background: #eff6ff;
+            color: #2563eb;
+            padding: 8px 11px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 12px
+        }
+
+        .upload-zone {
+            min-height: 220px;
+            border: 1.5px dashed #cbd5e1;
+            border-radius: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            cursor: pointer;
+            padding: 16px;
+            transition: .2s
+        }
+
+        .upload-zone:hover,
+        .upload-zone.dragover {
+            border-color: #2563eb;
+            background: #eff6ff
+        }
+
+        input[type=file] {
+            display: none
+        }
+
+        .upload-icon {
+            width: 48px;
+            height: 48px;
+            background: #eff6ff;
+            border-radius: 50%;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px
+        }
+
+        .upload-text {
+            margin-top: 10px;
+            font-weight: bold;
+            font-size: 18px
+        }
+
+        .upload-text span {
+            color: #2563eb
+        }
+
+        .helper {
+            margin-top: 6px;
+            font-size: 13px;
+            color: #64748b
+        }
+
+        .scan {
+            display: none;
+            text-align: center
+        }
+
+        .scan-spinner,
+        .button-spinner {
+            border-radius: 50%;
+            animation: spin .8s linear infinite
+        }
+
+        .scan-spinner {
+            width: 30px;
+            height: 30px;
+            border: 4px solid #dbeafe;
+            border-top-color: #2563eb;
+            margin: auto
+        }
+
+        .scan-title {
+            color: #2563eb;
+            font-weight: bold;
+            margin-top: 10px;
+            font-size: 16px
+        }
+
+        .scan-text {
+            color: #64748b;
+            font-size: 11px;
+            margin-top: 5px
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg)
+            }
+        }
+
+        .preview {
+            display: none;
+            width: 100%
+        }
+
+        .preview-image {
+            width: 100%;
+            height: 160px;
+            object-fit: contain;
+            background: #050505;
+            border-radius: 9px
+        }
+
+        .file-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            margin-top: 10px
+        }
+
+        .file-name {
+            font-weight: bold;
+            font-size: 10px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap
+        }
+
+        .file-size {
+            color: #64748b;
+            font-size: 13px;
+            margin-top: 3px
+        }
+
+        .remove {
+            border: 0;
+            background: #fff1f2;
+            color: #dc2626;
+            padding: 7px 9px;
+            border-radius: 7px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer
+        }
+
+        .accepted {
+            color: #16a34a;
+            font-size: 12px;
+            margin-top: 9px;
+            font-weight: 600
+        }
+
+        .context {
+            margin-top: 18px
+        }
+
+        .context h2 {
+            font-size: 20px
+        }
+
+        .context-description {
+            color: #64748b;
+            font-size: 15px;
+            margin: 4px 0 15px
+        }
+
+        .context-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 6px
+        }
+
+        select,
+        textarea {
+            width: 100%;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 16px;
+            outline: none;
+            background: #fff
+        }
+
+        select:focus,
+        textarea:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px #dbeafe
+        }
+
+        textarea {
+            resize: none
+        }
+
+        .compliance {
+            margin-top: 18px
+        }
+
+        .checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            font-size: 15px;
+            line-height: 1.5
+        }
+
+        .checkbox input {
+            width: 15px;
+            height: 15px
+        }
+
+        .required {
+            color: #dc2626
+        }
+
+        .submit-row {
+            margin-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px
+        }
+
+        .submit-info {
+            color: #64748b;
+            font-size: 15px
+        }
+
+        .submit {
+            border: 0;
+            background: #cbd5e1;
+            color: #fff;
+            padding: 11px 18px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: not-allowed;
+            font-size: 15px
+        }
+
+        .submit.active {
+            background: #2563eb;
+            cursor: pointer
+        }
+
+        .submit.active:hover {
+            background: #1d4ed8
+        }
+
+        .button-spinner {
+            display: none;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, .4);
+            border-top-color: #fff
+        }
+
+        .success {
+            display: none;
+            margin-top: 18px;
+            padding: 15px;
+            border-radius: 10px;
+            background: #ecfdf5;
+            border: 1px solid #bbf7d0
+        }
+
+        .success h3 {
+            color: #15803d;
+            font-size: 15px
+        }
+
+        .success p {
+            color: #166534;
+            font-size: 14px;
+            margin-top: 4px
+        }
+
+        .result-btn {
+            display: inline-block;
+            margin-top: 10px;
+            background: #16a34a;
+            color: white;
+            border: 0;
+            padding: 9px 15px;
+            border-radius: 7px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer
+        }
+
+        footer {
+            text-align: center;
+            color: #64748b;
+            font-size: 15px;
+            padding: 20px 0
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, .7);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+            padding: 15px
+        }
+
+        .modal-box {
+            background: #fff;
+            width: 100%;
+            max-width: 600px;
+            border-radius: 14px;
+            padding: 18px
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px
+        }
+
+        .close {
+            border: 0;
+            background: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #64748b
+        }
+
+        .sample-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px
+        }
+
+        .sample-image {
+            height: 190px;
+            background: #000;
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        .fundus-circle,
+        .blur-circle {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%
+        }
+
+        .fundus-circle {
+            background: radial-gradient(circle, #f28b35, #b9381d, #681414)
+        }
+
+        .blur-circle {
+            background: radial-gradient(circle, #b85a35, #7d1c1c, #300909);
+            filter: blur(8px)
+        }
+
+        .sample-title {
+            margin-top: 8px;
+            font-size: 11px;
+            font-weight: bold
+        }
+
+        .good {
+            color: #16a34a
+        }
+
+        .bad {
+            color: #dc2626
+        }
+
+        @media(max-width:700px) {
+            .header {
+                padding: 10px 15px
+            }
+
+            .brand h1 {
+                font-size: 14px
+            }
+
+            .status {
+                display: none
+            }
+
+            .container {
+                padding: 12px
+            }
+
+            .intro {
+                flex-direction: column;
+                align-items: flex-start
+            }
+
+            .upload-grid,
+            .context-grid,
+            .sample-grid {
+                grid-template-columns: 1fr
+            }
+
+            .submit-row {
+                flex-direction: column;
+                align-items: stretch
+            }
+
+            .submit {
+                width: 100%
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="header">
+            <div class="brand">
+                <div class="logo">
+                    <img src="logo.jpeg" alt="Eye Care Logo">
+                </div>
+                <div>
+                    <small>Diabetic Retinopathy Screening (DRS)</small>
+                    <h1>Retinal / Fundus Image Upload Portal</h1>
+                </div>
+            </div>
+
+            <div class="header-right">
+
+                <div class="status">
+                    <span></span>Secure clinical upload
+                </div>
+
+                <button class="profile-btn" onclick="openProfile()">
+                    <a href="profile.html" class="btn create-btn">
+                    👤 Profile
+                    </a>
+                </button>
+
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <section class="card">
+            <div class="intro">
+                <div>
+                    <h2>Upload retinal photographs</h2>
+                    <p>Upload a clear, high-resolution eye or retinal/fundus photograph. The image will be scanned
+                        before it is accepted.</p>
+
+                    <div class="badges">
+                        <div class="badge">Image Scan</div>
+                        <div class="badge">JPG / JPEG / PNG</div>
+                        <div class="badge">Maximum 25MB</div>
+                    </div>
+                </div>
+
+                <button class="sample-btn" id="sampleBtn">👁️ View Sample Image</button>
+            </div>
+        </section>
+
+        <section class="upload-grid">
+
+            <div class="card">
+                <div class="eye-title">
+                    <div>
+                        <h2>LEFT EYE <span>(OS)</span></h2>
+                        <p>Left-eye image</p>
+                    </div>
+                    <div class="eye-code">OS</div>
+                </div>
+
+                <div class="upload-zone" id="leftZone">
+
+                    <input type="file" id="leftInput" accept=".jpg,.jpeg,.png,image/jpeg,image/png">
+
+                    <div id="leftEmpty">
+                        <div class="upload-icon">⬆️</div>
+                        <p class="upload-text">Drag and drop or <span>browse</span></p>
+                        <p class="helper">Max 25MB. Supports JPG, JPEG, PNG.</p>
+                    </div>
+
+                    <div class="scan" id="leftScan">
+                        <div class="scan-spinner"></div>
+                        <p class="scan-title">Scanning image...</p>
+                        <p class="scan-text">Checking image content and retinal characteristics</p>
+                    </div>
+
+                    <div class="preview" id="leftPreview"></div>
+
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="eye-title">
+                    <div>
+                        <h2>RIGHT EYE <span>(OD)</span></h2>
+                        <p>Right-eye image</p>
+                    </div>
+                    <div class="eye-code">OD</div>
+                </div>
+
+                <div class="upload-zone" id="rightZone">
+
+                    <input type="file" id="rightInput" accept=".jpg,.jpeg,.png,image/jpeg,image/png">
+
+                    <div id="rightEmpty">
+                        <div class="upload-icon">⬆️</div>
+                        <p class="upload-text">Drag and drop or <span>browse</span></p>
+                        <p class="helper">Max 25MB. Supports JPG, JPEG, PNG.</p>
+                    </div>
+
+                    <div class="scan" id="rightScan">
+                        <div class="scan-spinner"></div>
+                        <p class="scan-title">Scanning image...</p>
+                        <p class="scan-text">Checking image content and retinal characteristics</p>
+                    </div>
+
+                    <div class="preview" id="rightPreview"></div>
+
+                </div>
+            </div>
+
+        </section>
+
+        <section class="card context">
+            <h2>Patient Context</h2>
+            <p class="context-description">Provide available clinical information.</p>
+
+            <div class="context-grid">
+
+                <div>
+                    <label>Known Retinopathy Status</label>
+                    <select id="status">
+                        <option>None/Unknown</option>
+                        <option>Mild/Moderate NPDR</option>
+                        <option>Severe NPDR</option>
+                        <option>Proliferative Diabetic Retinopathy (PDR)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>Clinical Notes / Recent Vision Changes</label>
+                    <textarea id="notes" rows="4" placeholder="Enter relevant clinical notes..."></textarea>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="card compliance">
+
+            <label class="checkbox">
+                <input type="checkbox" id="certify">
+                <span>
+                    I certify that these images match the selected patient record and do not contain burned-in patient
+                    text overlays.
+                    <span class="required">*</span>
+                </span>
+            </label>
+
+            <div class="submit-row">
+
+                <p class="submit-info">
+                    Only images accepted by the image scan can be viewed in results.
+                </p>
+
+                <button id="submitBtn" class="submit" disabled>
+                    <span id="submitText">View Result</span>
+                    <span id="buttonSpinner"></span>
+                </button>
+
+            </div>
+        </section>
+
+        <section id="successBox" class="success">
+            <h3>✓ Images Accepted</h3>
+            <p>The uploaded eye images passed the basic image scan.</p>
+            <button class="result-btn" id="resultBtn">
+                <a href="result.html" class="btn create-btn">
+                    View Result
+                </a>
+            </button>
+        </section>
+
+        <footer>
+            This portal is a prototype for image triage and does not replace professional medical diagnosis.
+        </footer>
+
+    </div>
+
+    <div class="modal" id="sampleModal">
+        <div class="modal-box">
+
+            <div class="modal-header">
+                <div>
+                    <h2>Sample Fundus Image</h2>
+                    <p style="color:#64748b;font-size:10px;margin-top:4px">Example of image quality</p>
+                </div>
+                <button class="close" id="closeModal">×</button>
+            </div>
+
+            <div class="sample-grid">
+
+                <div>
+                    <div class="sample-image">
+                        <div class="fundus-circle"></div>
+                    </div>
+                    <p class="sample-title good">✓ Clear / Gradable</p>
+                </div>
+
+                <div>
+                    <div class="sample-image">
+                        <div class="blur-circle"></div>
+                    </div>
+                    <p class="sample-title bad">✕ Blurry / Poor quality</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        function openProfile() {
+            window.location.href = "profile.html";
+        }
+
+        const MAX_SIZE = 25 * 1024 * 1024;
+
+        let leftFile = null;
+        let rightFile = null;
+
+        const leftZone = document.getElementById("leftZone");
+        const rightZone = document.getElementById("rightZone");
+
+        const leftInput = document.getElementById("leftInput");
+        const rightInput = document.getElementById("rightInput");
+
+        const leftEmpty = document.getElementById("leftEmpty");
+        const rightEmpty = document.getElementById("rightEmpty");
+
+        const leftScan = document.getElementById("leftScan");
+        const rightScan = document.getElementById("rightScan");
+
+        const leftPreview = document.getElementById("leftPreview");
+        const rightPreview = document.getElementById("rightPreview");
+
+        const certify = document.getElementById("certify");
+        const submitBtn = document.getElementById("submitBtn");
+        const submitText = document.getElementById("submitText");
+        const buttonSpinner = document.getElementById("buttonSpinner");
+        const successBox = document.getElementById("successBox");
+
+        function formatSize(bytes) {
+            if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + " KB";
+            return (bytes / (1024 * 1024)).toFixed(2) + " MB";
+        }
+
+        function validateFile(file) {
+
+            if (!["image/jpeg", "image/png"].includes(file.type)) {
+                alert("Image rejected.\n\nOnly JPG, JPEG and PNG images are supported.");
+                return false;
+            }
+
+            if (file.size > MAX_SIZE) {
+                alert("Image rejected.\n\nMaximum file size is 25MB.");
+                return false;
+            }
+
+            return true;
+        }
+
+        function analyzeImage(file) {
+
+            return new Promise(resolve => {
+
+                const image = new Image();
+                const url = URL.createObjectURL(file);
+
+                image.onload = function () {
+
+                    const canvas = document.createElement("canvas");
+                    const ctx = canvas.getContext("2d");
+
+                    const size = 200;
+                    canvas.width = size;
+                    canvas.height = size;
+
+                    ctx.drawImage(image, 0, 0, size, size);
+
+                    const pixels = ctx.getImageData(0, 0, size, size).data;
+
+                    let red = 0;
+                    let green = 0;
+                    let blue = 0;
+                    let brightness = 0;
+                    let dark = 0;
+                    let redPixels = 0;
+
+                    for (let i = 0; i < pixels.length; i += 4) {
+
+                        const r = pixels[i];
+                        const g = pixels[i + 1];
+                        const b = pixels[i + 2];
+
+                        red += r;
+                        green += g;
+                        blue += b;
+
+                        const value = (r + g + b) / 3;
+
+                        brightness += value;
+
+                        if (value < 35) dark++;
+
+                        if (r > g * 1.15 && r > b * 1.15 && r > 60) redPixels++;
+                    }
+
+                    const total = pixels.length / 4;
+
+                    const avgRed = red / total;
+                    const avgGreen = green / total;
+                    const avgBlue = blue / total;
+
+                    const avgBrightness = brightness / total;
+                    const darkRatio = dark / total;
+                    const redRatio = redPixels / total;
+
+                    const aspect = image.width / image.height;
+
+                    URL.revokeObjectURL(url);
+
+                    if (image.width < 300 || image.height < 300) {
+                        resolve(false);
+                        return;
+                    }
+
+                    if (aspect < .45 || aspect > 2.2) {
+                        resolve(false);
+                        return;
+                    }
+
+                    if (avgBrightness < 25 || avgBrightness > 245) {
+                        resolve(false);
+                        return;
+                    }
+
+                    if (redRatio > .04 && avgRed > avgGreen * 1.08 && avgRed > avgBlue * 1.15) {
+                        resolve(true);
+                        return;
+                    }
+
+                    resolve(
+                        avgRed > avgGreen * 1.08 &&
+                        avgRed > avgBlue * 1.12 &&
+                        darkRatio > .02 &&
+                        darkRatio < .75
+                    );
+
+                };
+
+                image.onerror = function () {
+                    URL.revokeObjectURL(url);
+                    resolve(false);
+                };
+
+                image.src = url;
+
+            });
+        }
+
+        async function scanFile(file, eye) {
+
+            const scan = eye === "left" ? leftScan : rightScan;
+            const empty = eye === "left" ? leftEmpty : rightEmpty;
+
+            scan.style.display = "block";
+            empty.style.display = "none";
+
+            await new Promise(resolve => setTimeout(resolve, 1000));
+
+            const accepted = await analyzeImage(file);
+
+            scan.style.display = "none";
+
+            if (!accepted) {
+
+                empty.style.display = "block";
+
+                alert(
+                    "❌ Image Rejected\n\n" +
+                    "The uploaded image does not appear to be a suitable eye/fundus photograph."
+                );
+
+                return false;
+            }
+
+            return true;
+        }
+
+        async function handleFile(file, eye) {
+
+            if (!file || !validateFile(file)) return;
+
+            const accepted = await scanFile(file, eye);
+
+            if (!accepted) return;
+
+            if (eye === "left") {
+                leftFile = file;
+                showPreview(file, "left");
+            } else {
+                rightFile = file;
+                showPreview(file, "right");
+            }
+
+            successBox.style.display = "none";
+            updateButton();
+        }
+
+        function showPreview(file, eye) {
+
+            const preview = eye === "left" ? leftPreview : rightPreview;
+            const empty = eye === "left" ? leftEmpty : rightEmpty;
+
+            empty.style.display = "none";
+            preview.style.display = "block";
+
+            const url = URL.createObjectURL(file);
+
+            preview.innerHTML = `
+<img src="${url}" class="preview-image" alt="${eye} eye image preview">
+
+<div class="file-row">
+
+<div style="min-width:0">
+<div class="file-name">${escapeHTML(file.name)}</div>
+<div class="file-size">${formatSize(file.size)}</div>
+</div>
+
+<button type="button" class="remove" onclick="removeImage('${eye}')">
+Remove image
+</button>
+
+</div>
+
+<div class="accepted">✓ Eye / fundus image accepted</div>
+`;
+        }
+
+        function escapeHTML(text) {
+
+            const div = document.createElement("div");
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function removeImage(eye) {
+
+            if (eye === "left") {
+
+                leftFile = null;
+                leftInput.value = "";
+                leftPreview.innerHTML = "";
+                leftPreview.style.display = "none";
+                leftEmpty.style.display = "block";
+
+            } else {
+
+                rightFile = null;
+                rightInput.value = "";
+                rightPreview.innerHTML = "";
+                rightPreview.style.display = "none";
+                rightEmpty.style.display = "block";
+            }
+
+            successBox.style.display = "none";
+            updateButton();
+        }
+
+        window.removeImage = removeImage;
+
+        function updateButton() {
+
+            const valid = (leftFile || rightFile) && certify.checked;
+
+            submitBtn.disabled = !valid;
+
+            if (valid) {
+                submitBtn.classList.add("active");
+            } else {
+                submitBtn.classList.remove("active");
+            }
+        }
+
+        function setupUpload(zone, input, eye) {
+
+            zone.addEventListener("click", event => {
+
+                if (event.target.closest(".remove")) return;
+
+                input.click();
+            });
+
+            zone.addEventListener("dragover", event => {
+
+                event.preventDefault();
+                zone.classList.add("dragover");
+            });
+
+            zone.addEventListener("dragleave", () => {
+                zone.classList.remove("dragover");
+            });
+
+            zone.addEventListener("drop", event => {
+
+                event.preventDefault();
+                zone.classList.remove("dragover");
+
+                const file = event.dataTransfer.files[0];
+
+                if (file) handleFile(file, eye);
+            });
+
+            input.addEventListener("change", function () {
+
+                if (this.files[0]) handleFile(this.files[0], eye);
+
+            });
+        }
+
+        setupUpload(leftZone, leftInput, "left");
+        setupUpload(rightZone, rightInput, "right");
+
+        certify.addEventListener("change", updateButton);
+
+        submitBtn.addEventListener("click", () => {
+
+            if (!leftFile && !rightFile) return;
+
+            submitBtn.disabled = true;
+            submitText.textContent = "Preparing result...";
+            buttonSpinner.style.display = "block";
+
+            setTimeout(() => {
+
+                buttonSpinner.style.display = "none";
+                submitText.textContent = "View Result";
+
+                successBox.style.display = "block";
+
+                localStorage.setItem("leftFileName", leftFile ? leftFile.name : "Not uploaded");
+                localStorage.setItem("rightFileName", rightFile ? rightFile.name : "Not uploaded");
+                localStorage.setItem("retinopathyStatus", document.getElementById("status").value);
+                localStorage.setItem("clinicalNotes", document.getElementById("notes").value);
+
+                updateButton();
+
+                successBox.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center"
+                });
+
+            }, 1500);
+
+        });
+
+        document.getElementById("resultBtn").addEventListener("click", () => {
+            window.location.href = "result.html";
+        });
+
+        document.getElementById("sampleBtn").addEventListener("click", () => {
+            document.getElementById("sampleModal").style.display = "flex";
+        });
+
+        document.getElementById("closeModal").addEventListener("click", () => {
+            document.getElementById("sampleModal").style.display = "none";
+        });
+
+        document.getElementById("sampleModal").addEventListener("click", event => {
+            if (event.target === document.getElementById("sampleModal")) {
+                document.getElementById("sampleModal").style.display = "none";
+            }
+        });
+
+        document.addEventListener("keydown", event => {
+            if (event.key === "Escape") {
+                document.getElementById("sampleModal").style.display = "none";
+            }
+        });
+
+        updateButton();
+    </script>
+
+</body>
+
+</html>
